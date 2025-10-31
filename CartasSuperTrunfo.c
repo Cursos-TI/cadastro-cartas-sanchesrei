@@ -12,14 +12,20 @@
 int main() {
   // Área para definição das variáveis para armazenar as propriedades das cidades
   char Estado_c1[50], Estado_c2[50],CodigoDaCarta_c1[10], CodigoDaCarta_c2[10],nomeDaCidade_c1[50], nomeDaCidade_c2[50];
-  int populacao_c1, populacao_c2,pontosDeTurismo_c1, pontosDeTurismo_c2;
+  int pontosDeTurismo_c1, pontosDeTurismo_c2;
   float Area_c1, Area_c2,pip_c1, pip_c2;
   float densidadePopulacional_c1, densidadePopulacional_c2,pibPerCapita_c1, pibPerCapita_c2;
   const float fatorDeConversao = 1e9; 
+  unsigned long int populacao_c1, populacao_c2;
+  int resultadoPopulacaoC1, resultadoPopulacaoC2;
+  int resultadoAreaC1, resultadoAreaC2, resultadoPibC1, resultadoPibC2, resultadoPontosTurismoC1, resultadoPontosTurismoC2, resultadoDensidadeC1, resultadoDensidadeC2, resultadoPibPerCapitaC1, resultadoPibPerCapitaC2,resultadoSuperpoderC1, resultadoSuperpoderC2;
   
 
+
   // Área para entrada de dados
-  printf("Ola Bem vindo ao cadastro de cartas do Super Trunfo - Cidades!\n");
+  printf("\n=======================================================================\n");
+  printf("     Ola Bem vindo ao cadastro de cartas do Super Trunfo - Cidades!");
+  printf("\n=======================================================================\n");
 
   printf("Digite uma letra de 'A' a 'H' (representando um dos oito estados):  ");
   scanf("%s", Estado_c1);
@@ -67,10 +73,12 @@ int main() {
   scanf("%d", &pontosDeTurismo_c2);
   printf("\nCadastro realizado com sucesso!\n\n");
 
+
   densidadePopulacional_c1 = (float)populacao_c1 / Area_c1;
   densidadePopulacional_c2 = (float)populacao_c2 / Area_c2;
   pibPerCapita_c1 = pip_c1 * fatorDeConversao / (float)populacao_c1;
   pibPerCapita_c2 = pip_c2 * fatorDeConversao / (float)populacao_c2;
+
 
 
   // Área para exibição dos dados da cidade
@@ -99,9 +107,44 @@ int main() {
   printf("Pib Per Capita: %.2f Reais\n", pibPerCapita_c2);
   printf("\n");
 
+  float inversoDens1 = 1.0f / densidadePopulacional_c1;
+  float inversoDens2 = 1.0f / densidadePopulacional_c2; 
+  float SuperpoderC1 = populacao_c1 + Area_c1 + pip_c1 + pontosDeTurismo_c1 +  pibPerCapita_c1 + inversoDens1;
+  float SuperpoderC2 = populacao_c2 + Area_c2 + pip_c2 + pontosDeTurismo_c2 + pibPerCapita_c2 + inversoDens2;
+
+  printf("\n==================================\n");
+  printf("       RESULTADO DA COMPARAÇÃO      \n");
+  printf("==================================\n");
+
+  resultadoPopulacaoC1 = (populacao_c1 > populacao_c2);
+  resultadoPopulacaoC2 = (populacao_c2 > populacao_c1);
+  printf("População: %s\n", resultadoPopulacaoC1 ? "Carta 1 Venceu (1)" : (resultadoPopulacaoC2 ? "Carta 2 Venceu (1)": "Empate"));
+
+  resultadoAreaC1 = (Area_c1 > Area_c2);
+  resultadoAreaC2 = (Area_c2 > Area_c1);
+  printf("Área: %s\n", resultadoAreaC1 ? "Carta 1 Venceu (1)" : (resultadoAreaC2 ? "Carta 2 Venceu (1)": "Empate"));
+
+  resultadoPibC1 = (pip_c1 > pip_c2);
+  resultadoPibC2 = (pip_c2 > pip_c1);
+  printf("PIB: %s\n", resultadoPibC1 ? "Carta 1 Venceu (1)" : (resultadoPibC2 ? "Carta 2 Venceu (1)": "Empate")); 
+
+  resultadoPontosTurismoC1 = (pontosDeTurismo_c1 > pontosDeTurismo_c2);
+  resultadoPontosTurismoC2 = (pontosDeTurismo_c2 > pontosDeTurismo_c1);
+  printf("Pontos Turísticos: %s\n", resultadoPontosTurismoC1 ? "Carta 1 Venceu (1)" : (resultadoPontosTurismoC2 ? "Carta 2 Venceu (1)": "Empate")); 
+
+  resultadoDensidadeC1 = (densidadePopulacional_c1 < densidadePopulacional_c2);
+  resultadoDensidadeC2 = (densidadePopulacional_c2 < densidadePopulacional_c1);
+  printf("Densidade Populacional: %s\n", resultadoDensidadeC1 ? "Carta 1 Venceu (0)" : (resultadoDensidadeC2 ? "Carta 2 Venceu (0)": "Empate"));
+
+  resultadoPibPerCapitaC1 = (pibPerCapita_c1 > pibPerCapita_c2);
+  resultadoPibPerCapitaC2 = (pibPerCapita_c2 > pibPerCapita_c1);
+  printf("PIB Per Capita: %s\n", resultadoPibPerCapitaC1 ? "Carta 1 Venceu (1)" : (resultadoPibPerCapitaC2 ? "Carta 2 Venceu (1)": "Empate"));    
+
+  resultadoSuperpoderC1 = (SuperpoderC1 > SuperpoderC2);
+  resultadoSuperpoderC2 = (SuperpoderC2 > SuperpoderC1);
+  printf("Superpoder: %s\n", resultadoSuperpoderC1 ? "Carta 1 Venceu (1)" : (resultadoSuperpoderC2 ? "Carta 2 Venceu (1)": "Empate"));   
 
 
-  
 
 return 0;
 } 
